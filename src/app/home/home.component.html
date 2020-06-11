@@ -4,7 +4,26 @@
       <span>Hello Hina !</span>
       <br />
 
-      <input class="btn btn-default" type="file" name="avatar" (change)="onFileUpload($event.target.files)" />
+      <div>
+        <form (ngSubmit)="onSubmit(model)" #form="ngForm">
+          <div class="d-flex flex-column" style="max-width: 350px;">
+            <div *ngFor="let field of fields" class="h6 form-group">
+              <label for="Childs_First_Name">{{ field }}</label>
+              <input
+                type="text"
+                class="form-control"
+                [id]="field"
+                placeholder="{{ field }}"
+                [(ngModel)]="model[field]"
+                name="{{ field }}"
+              />
+            </div>
+          </div>
+
+          <input class="btn btn-default" type="file" name="avatar" (change)="onFileUpload($event.target.files)" />
+          <button type="submit" class="btn btn-success" [disabled]="!form.form.valid">Submit</button>
+        </form>
+      </div>
     </h1>
   </div>
 </div>

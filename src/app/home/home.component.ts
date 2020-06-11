@@ -7,12 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  quote: string | undefined;
+  model: any = {};
   isLoading = false;
+  files: any;
+  fields = [
+    'Childs EI ID',
+    'Childs First Name',
+    'Childs Last Name',
+    'Childs DOB Month',
+    'Childs DOB Day',
+    'Childs DOB Year',
+    'Childs Address',
+    'Childs Apt',
+    'Childs Zipcode',
+    'Childs City',
+  ];
 
   constructor(private serv: QuoteService) {}
-  onFileUpload(filesArr: any, info: PdfInfo) {
-    const files = filesArr[0];
+
+  onFileUpload(filesArr: any) {
+    this.files = filesArr;
+  }
+
+  onSubmit(info: any) {
+    const files = this.files[0];
     const fileByteArray: any = [];
     const reader = new FileReader();
     reader.onload = processFile(files);

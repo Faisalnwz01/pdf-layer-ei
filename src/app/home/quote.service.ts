@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
+declare const download: (arg0: Uint8Array, arg1: string, arg2: string) => void;
 
 const routes = {
   quote: (c: RandomQuoteContext) => `/jokes/random?category=${c.category}`,
 };
-
 export interface RandomQuoteContext {
   // The quote's category: 'dev', 'explicit'...
   category: string;
@@ -46,7 +46,6 @@ export class QuoteService {
 
     // Get the width and height of the first page
     const { height } = PARENTAL_CONSENT_TO_INITIATE_SERVICE_COORDINATION.getSize();
-
     // Draw a string of text diagonally across the first page
     PARENTAL_CONSENT_TO_INITIATE_SERVICE_COORDINATION.drawText(info['Childs EI ID'], {
       x: 130,
@@ -265,8 +264,7 @@ export class QuoteService {
     // Serialize the PDFDocument to bytes (a Uint8Array)
     const pdfBytes = await pdfDoc.save();
 
-    // fs.writeFileSync('some.pdf', pdfBytes);
     // Trigger the browser to download the PDF document
-    // download(pdfBytes, 'pdf-lib_modification_example.pdf', 'application/pdf');
+    download(pdfBytes, 'pdf-lib_modification_example.pdf', 'application/pdf');
   }
 }
