@@ -2,8 +2,9 @@
   <div class="jumbotron text-center">
     <h1>
       <span>Hello Hina !</span>
+      <br />
 
-      <label class="btn btn-default"> Browse <input type="file" hidden /> </label>
+      <input class="btn btn-default" type="file" name="avatar" (change)="onFileUpload($event.target.files)" />
     </h1>
   </div>
 </div>
